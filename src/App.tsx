@@ -24,67 +24,65 @@ const getRandomColor = () => {
 
 function App() {
   // Variables used to create a number of rectangles, then store them in rectanglesList.
-  const [rectangles, setRectangles] = useState<number[]>([]);
-  const [colors, setColors] = useState<string[]>([]); // State to store colors for each rectangle
-  const [idCounter, setIdCounter] = useState<number>(0) // Ids of rectangles
-
-  useEffect(() => {
-    // Add initial rectangle
-    addRectangle();
-  }, []);
+  const [rectangles, setRectangles] = useState<{id: number, color: string}[]>([
+    { id: 0, color: getRandomColor() },
+    { id: 1, color: getRandomColor() }]);
+  const [idCounter, setIdCounter] = useState<number>(2) // Ids of rectangles
 
   // Copies the color of rectangle thats clicked on
-  const copyColor = (index: number) => {
-    navigator.clipboard.writeText(colors[index]);
-    alert("Copied the color: " + colors[index]);
+  const copyColor = (id: number) => {
+    const rectangle = rectangles.find(rect => rect.id === id);
+
+    if(rectangle){
+      const color = rectangle.color;
+      navigator.clipboard.writeText(color);
+      alert("Copied the color: " + color);
+    }
+    else{
+      alert("Failed to copy color");
+    }
   }
 
-  const refreshColor = (index: number) => {
+  const refreshColor = (id: number) => {
     const newColor = getRandomColor();
     
-    // Set the colors of the colors array. If i = index, overwrite color with the new one
-    setColors(prevColors => prevColors.map((color, i) => 
-      i === index ? newColor : color
-    ));
+    // Update the rectangles array with a new color for the matching id
+    setRectangles(prevRectangles =>
+      prevRectangles.map(rect =>
+        rect.id === id ? { ...rect, color: newColor } : rect
+      )
+    );
   }
 
-  const deleteRectangle = (index: number) => {
-    console.log(rectanglesList);
+  // Deletes a rectangle from the array by filtering image with corresponding id
+  const deleteRectangle = (id: number) => {
     setRectangles(prevRectangles => 
-      prevRectangles.filter((_, i) => i !== index)
-    );
-    setColors(prevColors => 
-      prevColors.filter((_, i) => i !== index)
+      prevRectangles.filter(rect => rect.id !== id)
     );
   }
 
-  // Add rectangle function
+  // Adds a rectangle to rectangles array
   const addRectangle = () => {
-    setIdCounter(prevCounter => prevCounter + 1)
-    console.log(idCounter);
     setRectangles(prevRectangles => {
-      //Get index for new rectangle
-      const newIndex = prevRectangles.length;
-      //Get new color for the new rectangle
+      const newId = idCounter;
       const newColor = getRandomColor();
-      
-      //Creates a new array with the previous colors using a "spread operator". The new color is then added to the end
-      setColors(prevColors => [...prevColors, newColor]);
-
-      //Return the list of the rectangles, including the new rectangle at the end.
-      return [...prevRectangles, newIndex];
+      // Update rectangles list
+      return [...prevRectangles, { id: newId, color: newColor }];
     });
+
+    // Increment ID counter
+    setIdCounter(prevCounter => prevCounter + 1);
   };
 
-  const rectanglesList = rectangles.map((index) => {
+  const rectanglesList = rectangles.map(({id, color}) => {
     return (
       <div
-        key={index} 
-        style={{ backgroundColor: colors[index] }}   
+        key={id} 
+        style={{ backgroundColor: color }}   
         className="colorCard">
-        <div onClick={() => copyColor(index)}><CopyButton /></div>
-        <div onClick={() => refreshColor(index)}><RefreshButton /></div>
-        <div onClick={() => deleteRectangle(index)}><DeleteButton /></div>
+        <div onClick={() => copyColor(id)}><CopyButton /></div>
+        <div onClick={() => refreshColor(id)}><RefreshButton /></div>
+        <div onClick={() => deleteRectangle(id)}><DeleteButton /></div>
       </div>
     );
   });
