@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.headerDiv {
+  position: relative;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -18,10 +22,57 @@
   width: 100%;
   padding-top: 50%; /* Maintains a 2:1 aspect ratio */
   border-radius: 6px;
-  
-  cursor: pointer;
 
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  position: relative;
+}
+
+.refreshBtn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+
+  cursor: pointer;
+
+  border: 0px;
+  background-color: rgba(255,255,255,0.4);
+
+} .refreshBtn:hover {
+  background-color: rgba(255,255,255,0.8);
+}
+
+.copyBtn {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+
+  cursor: pointer;
+
+  border: 0px;
+  background-color: rgba(255,255,255,0.4);
+
+} .copyBtn:hover {
+  background-color: rgba(255,255,255,0.8);
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+
+  cursor: pointer;
+
+  border: 0px;
+  background-color: rgba(255,255,255,0.4);
+} .deleteBtn:hover {
+  background-color: rgba(255,255,255,0.8);
 }
 
 .addRectangle {
@@ -55,4 +106,16 @@
 }/* Hover effect */
 .addItemBtn:hover {
   border: 2px solid #000000;
+}
+
+.loginBtn {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  display: flex;
+
+  font-size: 3.2em; /* Adjust the size as needed */
+
+  border: 0px;
+  background-color: inherit;
 }
