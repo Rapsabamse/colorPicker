@@ -2,28 +2,20 @@ import { useState } from 'react'
 import './App.css'
 
 import { Sketch, ColorResult } from '@uiw/react-color';
+import { getRandomColor } from './components/utils/colorUtils.tsx';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import AddButton from './components/AddButton';
-import LoginButton from './components/LoginButton';
-import RefreshButton from './components/RefreshButton';
-import CopyButton from './components/CopyButton.tsx';
-import DeleteButton from './components/DeleteButton.tsx';
-import ChangeColorButton from './components/ChangeColorButton.tsx';
+
+import AddButton from './components/colorCard/buttons/AddButton';
+import LoginButton from './components/colorCard/buttons/LoginButton';
+import RefreshButton from './components/colorCard/buttons/RefreshButton';
+import CopyButton from './components/colorCard/buttons/CopyButton.tsx';
+import DeleteButton from './components/colorCard/buttons/DeleteButton.tsx';
+import ChangeColorButton from './components/colorCard/buttons/ChangeColorButton.tsx';
 
 // Add fas icons to the library
 library.add(fas);
-
-// Generates a random color that will be used for the rectangles
-const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
 
 function App() {
   // Variables used to create a number of rectangles, then store them in rectanglesList.
