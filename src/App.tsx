@@ -4,16 +4,16 @@ import './App.css'
 import { Sketch, ColorResult } from '@uiw/react-color';
 import { getRandomColor } from './components/utils/colorUtils.tsx';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-
-import { DeleteButton, RefreshButton, CopyButton, ChangeColorButton }from './components/colorCard/buttons/cardButtons.tsx';
+import {  
+  DeleteButton, 
+  RefreshButton, 
+  CopyButton, 
+  ChangeColorButton 
+} from './components/colorCard/buttons/cardButtons.tsx';
 
 import AddButton from './components/AddButton.tsx';
 import LoginButton from './components/LoginButton.tsx';
 
-// Add fas icons to the library
-library.add(fas);
 
 function App() {
   // Variables used to create a number of rectangles, then store them in rectanglesList.
