@@ -7,12 +7,10 @@ import { getRandomColor } from './components/utils/colorUtils.tsx';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
-import AddButton from './components/colorCard/buttons/AddButton';
-import LoginButton from './components/colorCard/buttons/LoginButton';
-import RefreshButton from './components/colorCard/buttons/RefreshButton';
-import CopyButton from './components/colorCard/buttons/CopyButton.tsx';
-import DeleteButton from './components/colorCard/buttons/DeleteButton.tsx';
-import ChangeColorButton from './components/colorCard/buttons/ChangeColorButton.tsx';
+import { DeleteButton, RefreshButton, CopyButton, ChangeColorButton }from './components/colorCard/buttons/cardButtons.tsx';
+
+import AddButton from './components/AddButton.tsx';
+import LoginButton from './components/LoginButton.tsx';
 
 // Add fas icons to the library
 library.add(fas);
