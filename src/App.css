@@ -28,10 +28,9 @@
   position: relative;
 }
 
-.refreshBtn {
+/* Buttons that are on the cards */
+.cardBtn {
   position: absolute;
-  top: 3px;
-  right: 3px;
   border-radius: 50%;
   aspect-ratio: 1 / 1;
 
@@ -39,42 +38,32 @@
 
   border: 0px;
   background-color: rgba(255,255,255,0.4);
-
-} .refreshBtn:hover {
+} .cardBtn:hover {
   background-color: rgba(255,255,255,0.8);
 }
 
-.copyBtn {
-  position: absolute;
+#refreshBtn {
+  top: 3px;
+  right: 3px;
+} #copyBtn {
   bottom: 3px;
   right: 3px;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-
-  cursor: pointer;
-
-  border: 0px;
-  background-color: rgba(255,255,255,0.4);
-
-} .copyBtn:hover {
-  background-color: rgba(255,255,255,0.8);
-}
-
-.deleteBtn {
-  position: absolute;
+} #deleteBtn {
   top: 3px;
   left: 3px;
-  border-radius: 50%;
-  aspect-ratio: 1 / 1;
-
-  cursor: pointer;
-
-  border: 0px;
-  background-color: rgba(255,255,255,0.4);
-} .deleteBtn:hover {
-  background-color: rgba(255,255,255,0.8);
+} #changeColorBtn {
+  bottom: 3px;
+  left: 3px;
 }
 
+/* The color picker */
+.colorPicker {
+  width: inherit;
+  z-index: 1; 
+  position: absolute;
+}
+
+/* Button to add another rectangle */
 .addRectangle {
   background-color: inherit;
   border: 0px;
@@ -86,9 +75,7 @@
 
   display: flex;
   justify-content: center; /* Center horizontally */
-}
-
-.addItemBtn {
+} .addItemBtn {
   aspect-ratio: 1 / 1;
   height: 3vw;
 

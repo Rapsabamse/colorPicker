@@ -4,7 +4,7 @@ import { faTrash as icon } from '@fortawesome/free-solid-svg-icons';
 
 const LoginButton: React.FC = () => {
   return (
-    <button className='deleteBtn'>
+    <button className='cardBtn' id='deleteBtn'>
         <FontAwesomeIcon icon={icon} />
     </button>
   );

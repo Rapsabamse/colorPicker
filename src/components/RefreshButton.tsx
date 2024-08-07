@@ -4,8 +4,8 @@ import { faRefresh as icon } from '@fortawesome/free-solid-svg-icons';
 
 const RefreshButton: React.FC = () => {
   return (
-    <button className='refreshBtn'>
-        <FontAwesomeIcon icon={icon} className='refreshIcon'/>
+    <button className='cardBtn' id='refreshBtn'>
+        <FontAwesomeIcon icon={icon}/>
     </button>
   );
 };

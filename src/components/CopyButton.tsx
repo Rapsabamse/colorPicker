@@ -4,7 +4,7 @@ import { faCopy as icon } from '@fortawesome/free-solid-svg-icons';
 
 const CopyButton: React.FC = () => {
   return (
-    <button className='copyBtn'>
+    <button className='cardBtn' id='copyBtn'>
         <FontAwesomeIcon icon={icon} className='copyIcon'/>
     </button>
   );

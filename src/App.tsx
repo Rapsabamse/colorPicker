@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
+
+import { Sketch, ColorResult } from '@uiw/react-color';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +10,7 @@ import LoginButton from './components/LoginButton';
 import RefreshButton from './components/RefreshButton';
 import CopyButton from './components/CopyButton.tsx';
 import DeleteButton from './components/DeleteButton.tsx';
+import ChangeColorButton from './components/ChangeColorButton.tsx';
 
 // Add fas icons to the library
 library.add(fas);
@@ -27,7 +30,26 @@ function App() {
   const [rectangles, setRectangles] = useState<{id: number, color: string}[]>([
     { id: 0, color: getRandomColor() },
     { id: 1, color: getRandomColor() }]);
-  const [idCounter, setIdCounter] = useState<number>(2) // Ids of rectangles
+  const [idCounter, setIdCounter] = useState<number>(2) // Ids of rectangles (set standard to nbr of initial cards)
+  const [activePicker, setActivePicker] = useState<number | null>(null);; // Color pickers
+
+  //Change the color of a card to be the same as its colorpicker
+  const handleColorChange = (id: number, color: ColorResult) => {
+    setRectangles((prevRectangles) =>
+      prevRectangles.map((rect) =>
+        rect.id === id ? { ...rect, color: color.hex } : rect
+      )
+    );
+  };
+
+  // Set a specific color picker to active, if active picker is selected, hide picker
+  const showColorPicker = (id: number) => {
+    if(activePicker === id || id != -1){
+      setActivePicker(id === activePicker ? null : id);
+    } else{
+      setActivePicker(null);
+    }
+  };
 
   // Copies the color of rectangle thats clicked on
   const copyColor = (id: number) => {
@@ -43,6 +65,7 @@ function App() {
     }
   }
 
+  // Get a new random color for a card
   const refreshColor = (id: number) => {
     const newColor = getRandomColor();
     
@@ -63,6 +86,7 @@ function App() {
 
   // Adds a rectangle to rectangles array
   const addRectangle = () => {
+    console.log(idCounter)
     setRectangles(prevRectangles => {
       const newId = idCounter;
       const newColor = getRandomColor();
@@ -80,9 +104,23 @@ function App() {
         key={id} 
         style={{ backgroundColor: color }}   
         className="colorCard">
-        <div onClick={() => copyColor(id)}><CopyButton /></div>
-        <div onClick={() => refreshColor(id)}><RefreshButton /></div>
-        <div onClick={() => deleteRectangle(id)}><DeleteButton /></div>
+
+        <div onClick={() => copyColor(id)}>< CopyButton /></div>
+        <div onClick={() => refreshColor(id)}>< RefreshButton /></div>
+        <div onClick={() => deleteRectangle(id)}>< DeleteButton /></div>
+        <div onClick={() => showColorPicker(id)}>< ChangeColorButton /></div>
+
+        {/* If activepicker  is === id of specific card, render the colorpicker */}
+        {activePicker === id && (
+          <div>
+            <Sketch
+              className='colorPicker'
+              color={color}
+              onChange={(color) => handleColorChange(id, color)}
+            />
+          </div>
+        )}
+
       </div>
     );
   });
